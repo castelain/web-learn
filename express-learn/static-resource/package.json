@@ -1,0 +1,17 @@
+{
+  "name": "static-resource",
+  "version": "1.0.0",
+  "description": "A project for testing express.static()",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "express.static"
+  ],
+  "author": "jasmine",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.16.3"
+  }
+}

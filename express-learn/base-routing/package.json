@@ -1,0 +1,17 @@
+{
+  "name": "base-routing",
+  "version": "1.0.0",
+  "description": "A program for test base routing for express",
+  "main": "index.js",
+  "scripts": {
+    "test": "test"
+  },
+  "keywords": [
+    "base-routing"
+  ],
+  "author": "jasmine",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.16.3"
+  }
+}

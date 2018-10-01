@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Vue-Computed</title>
+</head>
+<body>
+    <div id="app"></div>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.js"></script>
+    <!-- 练习使用vue中的computed来实现对多个属性值的监听 -->
+    <script>
+        var App = {
+            template: `
+                <div>
+                    <input type="text" v-model="num1">
+                    + <input type="text" v-model="num2">
+                    - <input type="text" v-model="num3">
+                    = <p>{{ result }}</p>
+                </div>
+            `,
+            data: function(){
+                return {
+                    num1: 0,
+                    num2: 0,
+                    num3: 0,
+                };
+            },
+            computed: {
+                // 该监听函数监听的属性都在函数内部给出了（函数中，凡是以this.xxx形式出现的属性，都是被监听的对象，一但出现改变，就会调用该函数）
+                result: function(){
+                    return Number(this.num1) + Number(this.num2) - Number(this.num3);
+                }
+            }
+        };
+
+        new Vue({
+            el: '#app',
+            components: {
+                app: App,
+            },
+            template: `<app/>`,
+        });
+
+    </script>
+</body>
+</html>

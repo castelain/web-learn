@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Query-Params</title>
+</head>
+<body>
+    <!-- 练习在vue中向路由中传参 -->
+    <div id="app"></div>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.js"></script>
+    <script src="https://unpkg.com/vue-router/dist/vue-router.js"></script>
+    <script>
+        Vue.use(VueRouter);
+        var Login = {
+            template: `
+                <div>
+                    <h1>登陆页面</h1>
+                </div>
+            `,
+            mounted: function(){
+                console.log('login-query');
+                console.log(this.$route.query.id);
+            },
+        };
+        var Register = {
+            template: `
+                <div>
+                    <h1>注册页面</h1>
+                </div>
+            `,
+            // 组件的一个生命周期钩子函数，此时可以获取到组件了
+            mounted: function(){
+                console.log('register-params');
+                console.log(this.$route.params.name);
+            },
+        };
+        var router = new VueRouter({
+            routes: [
+                {
+                    name: 'mainPage',
+                    path: '/',
+                    redirect: '/login'
+                },
+                {
+                    name: 'login',
+                    path: '/login',
+                    component: Login,
+                },
+                {
+                    name: 'register',
+                    path: '/register/name',
+                    component: Register,
+                }
+            ]
+        });
+        // 通过向 router-link 的 to 属性中传值，来实现向路由传递参数的目的
+        // 传递的参数可以通过 this.$route.params 或 this.$route.query 来获取
+        var App = {
+            template: `
+                <div>
+                    <router-link :to="{
+                        name: 'login',
+                        query: {
+                            id: '20151120247',
+                        },
+                    }">登陆去</router-link>
+                    <router-link :to="{
+                        name: 'register',
+                        params: {
+                            name: 'abc',
+                        },
+                    }">注册去</router-link>
+                    <router-view></router-view>
+                </div>
+            `
+        };
+        new Vue({
+            el: '#app',
+            router: router,
+            components: {
+                app: App
+            },
+            template: `<app/>`,
+        });
+
+    </script>
+</body>
+</html>

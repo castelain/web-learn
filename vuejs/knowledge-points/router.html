@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Vue-Router</title>
+</head>
+<body>
+    <!-- 练习vue中的vue-router的使用 -->
+    <div id="app"></div>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.js"></script>
+    <script src="https://unpkg.com/vue-router/dist/vue-router.js"></script>
+    <script>
+        Vue.use(VueRouter);
+        var MainPage = {
+            template: `
+                <h1>首页</h1>
+            `,
+        };
+        var Login = {
+            template: `
+                <h1>登陆页面</h1>
+            `,
+        };
+        var Register = {
+            template: `
+                <h1>注册页面</h1>
+        `,
+        };
+       // Vue.component('login', Login);
+       // Vue.component('register', Register);
+
+        var router = new VueRouter({
+            routes:[
+            { name:'main', path: '/', component: MainPage},
+            { name:'login', path: '/login', component: Login },
+            { name:'register', path: '/register', component: Register }
+          ],
+        });
+        var App = {
+            template: `
+                <div>
+                    <router-link :to="{name: 'main'}">首页</router-link>
+                    <router-link :to="{name: 'login'}">登陆去</router-link>
+                    <router-link :to="{name: 'register'}">注册去</router-link>
+                    <router-view></router-view>
+                </div>
+            `,
+        };
+        new Vue({
+            el: '#app',
+            router: router,
+            components: {
+                app: App,
+            },
+            template: `<app/>`,
+        });
+
+    </script>
+</body>
+</html>

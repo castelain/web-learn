@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Vuex-Getter</title>
+        <meta name="description" content="Vuex-Getter">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+    </head>
+    <body>
+        <div id="app">
+        </div>
+        <script src="https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.js"></script>
+        <script src="https://unpkg.com/vuex@3.0.1/dist/vuex.js"></script>
+        <script>
+            const store = new Vuex.Store({
+                state: {
+                    todoList: [
+                        { id: 1, content: 'read', isDone: true},
+                        { id: 1, content: 'drink', isDone: true },
+                        { id: 1, content: 'go shopping', isDone: true },
+                        { id: 1, content: 'watch tv', isDone: true },
+                        { id: 1, content: 'eat', isDone: true },
+                        { id: 1, content: 'sleep', isDone: false }
+                    ]
+                },
+                mutations: {
+                    addTodoList: (state, item) => {
+                        state.todoList.push(item)
+                    },
+                    removeTodoList: state => {
+                        state.todoList.pop()
+                    }
+                },
+                getters: {
+                    doneCount: state => {
+                        return state.todoList.filter( item => item.isDone ).length
+                    }
+                }
+            })
+
+            const todoList = {
+                data: () => {
+                    return {
+                        num: 0
+                    }
+                },
+                template: `
+                    <div>
+                        <ul>
+                            <li v-for="(item, index) in todoList" :key="index">
+                                {{ item.content }}
+                            </li>
+                        </ul>
+                        <button @click="showDoneNum">显示已完成的数量</button>
+                        <p>{{ num }}</p>
+                    </div>
+                `,
+                computed: {
+                    todoList: () => {
+                        // return this.$store.state.todoList
+                    }
+                },
+                methods: {
+                    showDoneNum: () => {
+                        this.num = this.$store.getters.doneCount
+                    }
+                }
+            }
+
+            const app = new Vue({
+                el: '#app',
+                store,
+                components: {
+                    todoList
+                },
+                template: `
+                    <div>
+                        <todoList></todoList>
+                    </div>
+                `
+            })
+        </script>
+    </body>
+</html>

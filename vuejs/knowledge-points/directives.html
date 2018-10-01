@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>VUE-Directives</title>
+    <style>
+        .center{
+            text-align: center;
+            text-shadow: 1px 1px 2px palegreen;
+            color: gold;
+        }
+        .right{
+            float: right;
+            color: blue;
+        }
+    </style>
+</head>
+<body>
+    <div id="app"></div>
+    <!-- 练习VUE的常见指令 -->
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.js"></script>
+    <script>
+        new Vue({
+            el: '#app',
+            template: `
+                <div>
+                    <h1 :class='isCenter? centerClass: rightClass'>{{ title }}</h1>
+                    <input type='text' v-model='value'>
+                    <p>The input value is : {{ value }}</p>
+                    <ul v-if='isExit'>
+                        <li v-for='(item,index) in todos'>{{ index + 1 }}、{{ item }}</li>
+                    </ul>
+                    <button @click='changeExit'>切换列表的呈现与否</button>
+                </div>
+            `,
+            data: function(){
+              return{
+                  title: 'This is a small example for vue-directives',
+                  isCenter: true,
+                  centerClass: 'center',
+                  rightClass: 'right',
+                  isExit: true,
+                  value: 'Please input a string',
+                  todos: [
+                    'study',
+                    'find a job',
+                    'record words',
+                    'eat',
+                    'sleep',
+                    'have a rest'
+                ],
+              }
+            },
+            methods: {
+                changeExit: function(){
+                    this.isExit = !this.isExit;
+                }
+            }
+        });
+    </script>
+</body>
+</html>

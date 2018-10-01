@@ -1,0 +1,34 @@
+body{
+    margin: 0;
+    padding: 0;
+}
+a{
+  text-decoration: none;
+  color: black;
+}
+li{
+  list-style: none;
+}
+.content img{
+  width: 50px;
+  height: 60px;
+}
+.tmpl{
+  margin-bottom: 80px;
+}
+.mint-button--large{
+  margin: 10px auto;
+}
+.red{
+  color: red;
+}
+.grey{
+  text-decoration-line: line-through;
+  color: lightslategray;
+}
+.right{
+  float: right;
+}
+.left{
+  float: left;
+}

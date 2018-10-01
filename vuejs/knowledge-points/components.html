@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Vue-components</title>
+</head>
+<body>
+    <!-- 练习vue中的组件的编写(生成子，声明子，使用子)以及父子之间的通信（通过属性值传递数据） -->
+    <div id="app"></div>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.js"></script>
+    <script>
+        var Son = {
+            props: [ 'title' ],
+            template: `
+                <div>
+                    <h1>{{ title }}</h1>
+                    <p>This a message from son of component App!</p>
+                </div>
+            `,
+        };
+        var App = {
+            components:{
+                son: Son,
+            },
+            data: function(){
+                return {
+                    toSon: 'A message from parent to son!'
+                };
+            },
+            template:`<son :title="toSon"></son>`,
+        };
+
+        new Vue({
+            el: '#app',
+            components: {
+                app: App,
+            },
+            template: `<app/>`,
+        });
+    </script>
+</body>
+</html>

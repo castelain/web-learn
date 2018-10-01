@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+ <html language="zh-cn">
+    <head>
+        <meta charset="utf-8">
+        <title>Start-Vuex</title>
+        <meta name="description" content="hello to vuex">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+    </head>
+    <body>
+        <div id="app">
+            <h2>计数：{{ count }}</h2>
+            <button @click="increment">+</button>
+            <button @click="decrement">-</button>
+        </div>
+        <script src="https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.js"></script>
+        <script src="https://unpkg.com/vuex@3.0.1/dist/vuex.js"></script>
+        <script>
+            const store = new Vuex.Store({
+                state: {
+                    count: 0
+                },
+                mutations: {
+                    increment(state){
+                        state.count ++
+                    },
+                    decrement(state){
+                        state.count --
+                    }
+                }
+            })
+            const app = new Vue({
+                el: '#app',
+                computed: {
+                    count(){
+                        return store.state.count
+                    }
+                },
+                methods: {
+                    increment(){
+                        store.commit('increment')
+                    },
+                    decrement(){
+                        store.commit('decrement')
+                    }
+                }
+            })
+        </script>
+    </body>
+</html>

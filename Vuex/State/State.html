@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Vuex-state</title>
+        <meta name="description" content="Vuex-state">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+    </head>
+    <body>
+        <div id="app">
+        </div>
+        <script src="https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.js"></script>
+        <script src="https://unpkg.com/vuex@3.0.1/dist/vuex.js"></script>
+        <script>
+            const store = new Vuex.Store({
+                state: {
+                    count: 0
+                },
+                mutations: {
+                    increment(state){
+                        state.count ++
+                    },
+                    decrement(state){
+                        state.count --
+                    }
+                }
+            })
+            const counter = {
+                template: `
+                    <div>
+                        <p>{{ count }}</p>
+                        <button @click="increment">+</button>
+                        <button @click="decrement">-</button>
+                    </div>
+                `,
+                computed: {
+                    count(){
+                        return this.$store.state.count
+                    }
+                },
+                methods: {
+                    increment(){
+                        this.$store.commit('increment')
+                    },
+                    decrement(){
+                        this.$store.commit('decrement')
+                    }
+                }
+            }
+            new Vue({
+                el: '#app',
+                store,
+                components: {
+                    counter
+                },
+                template: `<counter></counter>`,
+            })
+        </script>
+    </body>
+</html>

@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Meta-Root-Manage</title>
+</head>
+<body>
+    <!-- 练习vue中的前端路由的权限控制 -->
+    <div id="app"></div>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.js"></script>
+    <script src="https://unpkg.com/vue-router/dist/vue-router.js"></script>
+    <script>
+        var isLogin = false;
+        Vue.use(VueRouter);
+        var Login = {
+            template: `
+                <h1>登陆页面</h1>
+            `,
+            created: function(){
+                isLogin = true;
+            }
+        };
+        var Music = {
+            template: `
+                <h1>我的音乐页面</h1>
+            `
+        };
+        var router = new VueRouter({
+            routes: [
+                {
+                    name: 'mainPage',
+                    path: '/',
+                    redirect: {name: 'login'}
+                },
+                {
+                   name: 'login',
+                   path: '/login',
+                   component: Login
+                },
+                {
+                    name: 'music',
+                    path: '/music',
+                    component: Music,
+                    meta: {
+                        isChecked: true,
+                    }
+                }
+            ]
+        });
+        // 定义全局路由守卫
+        router.beforeEach(function(to,from,next){
+            if( !to.meta.isChecked ){
+                next();
+            }else if( isLogin ){
+                next();
+            }else{
+                alert('请先登录...');
+                next({ name: 'login' });
+            }
+        });
+        var App = {
+            template: `
+                <div>
+                    <router-link :to="{name: 'login'}">登录</router-link>
+                    <router-link :to="{name: 'music'}">我的音乐</router-link>
+                    <router-view></router-view>
+                </div>
+            `
+        };
+        new Vue({
+            el: '#app',
+            router: router,
+            components:{
+                app: App,
+            },
+            template: `
+                <app/>
+            `,
+        });
+    </script>
+</body>
+</html>

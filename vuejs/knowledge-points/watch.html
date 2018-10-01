@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Vue-Watch</title>
+</head>
+<body>
+    <div id="app"></div>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.js"></script>
+    <!-- 练习vue中的watch监听单个属性 -->
+    <script>
+        var App = {
+            template: `
+                <div>
+                    <input type="text" v-model="text">
+                    <p>The value of input is: {{ text }}</p>
+                    <hr>
+                    <input type="text" v-model="students[0].name">
+                    <p>students[0].name = {{ students[0].name }}</p>
+                </div>
+            `,
+            data: function(){
+                return {
+                    text: '',
+                    students: [{name: 'jasmine'}],
+                };
+            },
+            // 定义watch监听指定的属性
+            watch: {
+                // 对于简单数据类型的监听，直接检测地址是否发生改变即可
+                text: function(newVal, oldVal){
+                    console.log('newValue: ' + newVal + ',' + 'oldValue: ' + oldVal);
+                    if(newVal === 'I Love You'){
+                        alert('Sorry, I do not love you!');
+                    }
+                },
+                // 深度监听(针对引用数据类型的值的改变(地址不会变)，比如：object,array)
+                students: {
+                    deep: true,
+                    handler: function(newVal,oldVal){
+                        console.log('newValue: ' + newVal + ',' + 'oldValue: ' + oldVal);
+                        console.log('Deep watch is successed!');
+                    }
+                },
+            },
+        };
+        new Vue({
+            el: '#app',
+            components: {
+                app: App,
+            },
+            template: `<app/>`,
+        });
+
+    </script>
+</body>
+</html>

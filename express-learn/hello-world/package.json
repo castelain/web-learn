@@ -1,0 +1,19 @@
+{
+  "name": "express-learn",
+  "version": "1.0.0",
+  "description": "A package for express learning",
+  "main": "index.js",
+  "scripts": {
+    "test": "test"
+  },
+  "keywords": [
+    "express",
+    "learning"
+  ],
+  "author": "jasmine",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.16.3",
+    "express-generator": "^4.16.0"
+  }
+}

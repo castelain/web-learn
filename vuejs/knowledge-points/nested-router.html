@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Nested-Router</title>
+</head>
+<body>
+    <!-- 练习嵌套路由的使用 -->
+    <div id="app"></div>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.js"></script>
+    <script src="https://unpkg.com/vue-router/dist/vue-router.js"></script>
+    <script>
+        Vue.use(VueRouter);
+        Vue.component('App',{
+            template: `
+                <router-view></router-view>
+            `
+        });
+        var Login = {
+            template: `
+            <div>
+                    <router-link :to="{ name: 'women'}">女士登录</router-link>
+                    <router-link :to="{ name: 'men' }">男士登录</router-link>
+                    <h1>登录页面</h1>
+                    <router-view></router-view>
+                </div>
+            `
+        };
+        var WomenLogin = {
+            template: `
+                <div>
+                    <h2>欢迎来到女士登录...</h2>
+                </div>
+            `
+        };
+        var MenLogin = {
+            template: `
+                <div>
+                    <h2>欢迎来到男士登录...</h2>
+                </div>
+            `
+        };
+        var router = new VueRouter({
+            routes: [
+                {
+                    name: 'mainPage',
+                    path: '/',
+                    redirect: '/login'
+                },
+                {
+                    name: 'login',
+                    path: '/login',
+                    component: Login,
+                    children: [
+                        {
+                            name: 'women',
+                            path: '/women',
+                            component: WomenLogin
+                        },
+                        {
+                            name: 'men',
+                            path: '/men',
+                            component: MenLogin
+                        }
+                    ]
+                }
+            ],
+        });
+        new Vue({
+            el: '#app',
+            router: router,
+            template: `<app/>`,
+        });
+
+    </script>
+</body>
+</html>

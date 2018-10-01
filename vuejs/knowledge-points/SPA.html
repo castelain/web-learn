@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>The-Main-Point-of-SPA</title>
+</head>
+<body>
+    <a href="file:///C:/Users/Jasmine/Desktop/%E5%89%8D%E7%AB%AF%E5%AD%A6%E4%B9%A0/%E5%BC%80%E8%AF%BE%E5%90%A7/vuejs/SPA.html#/login">登陆去</a>
+    <a href="file:///C:/Users/Jasmine/Desktop/%E5%89%8D%E7%AB%AF%E5%AD%A6%E4%B9%A0/%E5%BC%80%E8%AF%BE%E5%90%A7/vuejs/SPA.html#/register">注册去</a>
+    <div id="app"></div>
+    <p>在地址栏加上哈希值：#/login 或 #/register ，看看会发生什么吧</p>
+    <!-- 实现 SPA（单页应用）的关键点：前端路由（hashchange事件），url部分的hash值发生变化，页面不会整页刷新，而是更新页面的部分 -->
+    <script>
+        var div = document.getElementById('app');
+        window.onhashchange = function(){
+            // console.log(location.hash);
+            switch (location.hash){
+                case '#/login':
+                    div.innerHTML = `
+                        <h1>登陆界面</h1>
+                    `;
+                    break;
+                case '#/register':
+                    div.innerHTML = `
+                        <h1>注册界面</h1>
+                    `;
+                    break;
+                default:
+                    div.innerHTML = `
+                        <h1>其他界面</h1>
+                    `;
+            }
+        };
+    </script>
+</body>
+</html>

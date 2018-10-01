@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>vue-filter</title>
+</head>
+<body>
+    <!-- 练习使用filter（全局过滤器和组件内的过滤器） -->
+    <div id="app"></div>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.js"></script>
+    <script>
+        // 定义一个全局的过滤器（将输入的所有小写字母都转化为大写字母）
+        Vue.filter('globalFilter', function(data){
+            return data.toUpperCase();
+        });
+        new Vue({
+            el: '#app',
+            template: `
+                <div>
+                    <input type="text" v-model="text">
+                    <p>Value of Input is: {{ text | innerFilter('!') | globalFilter }}</p>
+                </div>
+            `,
+            data: function(){
+                return {
+                    text: '',
+                };
+            },
+            // 定义组件内的过滤器(将输入的字符串进行逆序的处理)
+            filters: {
+                innerFilter: function(data,sym){
+                    return data.split('').reverse().join('') + sym;
+                }
+            },
+        });
+    </script>
+</body>
+</html>
