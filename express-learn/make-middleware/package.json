@@ -1,0 +1,17 @@
+{
+  "name": "make-middleware",
+  "version": "1.0.0",
+  "description": "A package for testing making express middleware",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "middleware"
+  ],
+  "author": "jasmine",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.16.3"
+  }
+}

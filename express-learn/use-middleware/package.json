@@ -1,0 +1,19 @@
+{
+  "name": "use-middleware",
+  "version": "1.0.0",
+  "description": "A package for testing express-middleware",
+  "main": "index.js",
+  "scripts": {
+    "test": "test",
+    "start": "node index.js"
+  },
+  "keywords": [
+    "express-middleware"
+  ],
+  "author": "jasmien",
+  "license": "ISC",
+  "dependencies": {
+    "cookie-parser": "^1.4.3",
+    "express": "^4.16.3"
+  }
+}
